@@ -3,19 +3,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
-// Route::resource('cloth','ClothController');
 Route::get('/home', 'ClothController@home')->name('home');
 Route::get('/create', 'ClothController@create')->name('create');
 Route::post('/store', 'ClothController@store')->name('store');
-Route::get('/edit', 'ClothController@edit')->name('edit');
+Route::get('/edit/{id}', 'ClothController@edit')->name('edit');
 Route::post('/update', 'ClothController@update')->name('update');
 Route::get('/delete', 'ClothController@delete')->name('delete');
-Route::get('/show/{category_id}', 'ClothController@show')->name('show');
+Route::get('/show/{id}', 'ClothController@show')->name('show');
 
 Route::group(['prefix' => 'user'], function() {
- 
+
   Route::get('/signup',[
     'uses' => 'UserController@getSignup',
     'as' => 'user.signup'

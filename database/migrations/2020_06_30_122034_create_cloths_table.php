@@ -19,7 +19,6 @@ class CreateClothsTable extends Migration
             $table->string('brand_name');
             $table->string('memo');
             $table->timestamps();
-            $table->string('cover_filename')->after('remember_token')->nullable();
         });
     }
 

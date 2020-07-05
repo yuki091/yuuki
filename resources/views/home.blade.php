@@ -18,13 +18,8 @@
   </div>
   
 </div>
-<a>新規登録</a>
+<a href="create">新規登録</a>
   <table>
-    <tr>
-      <th>詳細</th>
-      <th>編集</th>
-      <th>削除</th>
-    </tr>
     @foreach ($clothes as $cloth)
     <tr>
       <td>カテゴリー：{{ $cloth->category_name }}</td>
