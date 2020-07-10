@@ -10,5 +10,7 @@ class Cloth extends Model
         'category_name',
         'brand_name',
         'memo',
+        'cloth_filename',
     ];
+    protected $primaryKey = 'category_id';
 }

@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Cloth;
 use Illuminate\Http\Request;
+use Storage;
+use Intervention\Image\Facades\Image;
+
    
 class ClothController extends Controller
 {   
  
-    public function home()
+    public function index()
     {
         $clothes = Cloth::all();
         return view('home',['clothes' => $clothes]);
@@ -19,36 +22,48 @@ class ClothController extends Controller
     }
     public function store(Request $request)
     {
-        Cloth::create($request->all());
-        return redirect('/home');
+
+        // Cloth::create($request->all());
+        $path = $request->file('filename')->store('public/cloth_images');
+        
+        $clothes = new Cloth;
+        $clothes->category_name=$request->category_name;
+        $clothes->brand_name=$request->brand_name;
+        $clothes->memo=$request->memo;
+        $clothes->$request->$path;
+        $clothes->save();
+        
+        // return redirect('/home');
+
+        
+
+        
     }
-    // public function show()
-    // {
-    //     $cloth = Cloth::find($category_id);
-    //     return view('home.show',['cloth'=> $cloth]);
-    // }
-    public function show(Cloth $cloth){
-        $data=Cloth::find("category_id",$cloth->category_id)->first();
-        return view("home.show",["data"=>$data]);
+
+    public function show($id)
+    {
+        $cloth = Cloth::find($id);
+        return view('show',['cloth'=>$cloth]);
     }
     public function edit($id)
     {
         $cloth = Cloth::find($id);
-        return view('edit',compact('cloth'));
+        return view('edit',['cloth'=>$cloth]);
     }
     public function update(Request $request, $id)
     {
-        $update = [
-            'category' => $request -> category,
-            'brand' =>$request -> brand,
-            'memo' =>$request -> memo
+        $updata=[
+            'category_name'=>$request->category_name,
+            'brand_name'=>$request->brand_name,
+            'memo'=>$request->memo
         ];
-        Cloth::where('id', $id) ->update($update);
+        Cloth::where('id',$id)->update($update);
         return back()->with('success', '編集完了しました');
     }
     public function destroy($id)
     {
-        Cloth::where('id', $id)->delete();
-        return redirect()->route('home')->with('success', '削除しました');
+        $cloth=Cloth::find($id);
+        $cloth->delete();
+        return redirect('home');
     }
 }

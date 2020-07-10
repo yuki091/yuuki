@@ -18,15 +18,24 @@
   </div>
   
 </div>
-<a href="create">新規登録</a>
+<a href="/home/create">新規登録</a>
   <table>
     @foreach ($clothes as $cloth)
     <tr>
+      <!-- <td><img src="{{$cloth->cloth_filename}}" width="200" height="130"></td> -->
+      <img src="{{ asset('/storage/cloth_images/'.$cloth->cloth_filename) }}">
+      
       <td>カテゴリー：{{ $cloth->category_name }}</td>
-      <td>ブランド：{{ $cloth->brand_name }}</td>
-      <td>メモ：{{ $cloth->memo }}</td>
-      <td><a href="/show/{{$cloth->category_id}}">詳細</a></td>
-    </tr>
+      <td>ブランド：{{ $cloth['brand_name'] }}</td>
+      <td>メモ：{{ $cloth['memo'] }}</td>
+      <a href="/home/{{$cloth->category_id}}">詳細</a>
+      <td><a href="/home/{{$cloth->category_id}}/edit">編集</a></td>
+      <from action="/home/{{$cloth->category_id}}" method="post">
+        {{ csrf_field() }}
+        @method('DELETE')
+        <input type="submit" name="" value="サクじょする">
+      </form>
+    </tr> 
     @endforeach
   </table>
 

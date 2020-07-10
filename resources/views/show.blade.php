@@ -7,7 +7,6 @@
 </head>
 <body>
 <h1>詳細</h1>
-<p><a href="{{ route('home')}}">Cloth List</a></p>
 <table>
     <tr>
         <th>category</th>
@@ -16,10 +15,12 @@
         <th>created_at</th>
     </tr>
     <tr>
-        <td>{{ $clothes->category }}</td>
-        <td>{{ $clothes->brand }}</td>
-        <td>{{ $clothes->memo }}</td>
-        <td>{{ $clothes->created_at }}</td>
+        <td>{{ $cloth->category_name }}</td>
+        <td>{{ $cloth->brand_name }}</td>
+        <td>{{ $cloth->memo }}</td>
+        <td>{{ $cloth->created_at }}</td>
+        <td><a href="/home/{{ $cloth->category_id }}/edit">編集</a></td>
+        <a href="/home">ホーム</a>
     </tr>
 </table>
     

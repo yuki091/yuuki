@@ -19,6 +19,7 @@ class CreateClothsTable extends Migration
             $table->string('brand_name');
             $table->string('memo');
             $table->timestamps();
+            $table->string('cloth_filename',100);
         });
     }
 
