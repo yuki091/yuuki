@@ -14,12 +14,15 @@ class CreateClothsTable extends Migration
     public function up()
     {
         Schema::create('cloths', function (Blueprint $table) {
-            $table->increments('category_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
             $table->string('category_name');
             $table->string('brand_name');
             $table->string('memo');
-            $table->timestamps();
             $table->string('cloth_filename',100);
+            $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -11,6 +11,10 @@ class Cloth extends Model
         'brand_name',
         'memo',
         'cloth_filename',
+        'user_id'
     ];
-    protected $primaryKey = 'category_id';
+    public function user() 
+    {
+    return $this->belongsTo('App\User');
+    }
 }

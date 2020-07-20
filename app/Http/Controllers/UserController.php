@@ -24,11 +24,12 @@ class UserController extends Controller
         'password' => bcrypt($request->input('password')),
     ]);
     $user->save();
-    return redirect()->route('user.profile');
+    // return redirect()->route('user.profile');
+    return redirect("home");
     }
-    public function getProfile(){
-        return view('user.profile');
-    }
+    // public function getProfile(){
+    //     return view('user.profile');
+    // }
     public function getSignin()
     {
     return view('user.signin');
@@ -40,9 +41,11 @@ class UserController extends Controller
    'password' => 'required|min:4'
    ]);
     if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
-    return redirect()->route('home');
+    // return redirect()->route('user.profile');
+    return redirect("home");
     }
     return redirect()->back();
     }
+   
 
 }

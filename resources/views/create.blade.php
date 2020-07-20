@@ -9,19 +9,86 @@
   <div>
     <div class="header flex">
         <div class="header-title">
-          <p>Mycloth</p>
-        </div> 
+          <p>Mycloset</p>
+        </div>
+        <div class="header-right flex">
+          <a href="/home">Home</a>
+        </div>
     </div>
-    
     <form method="post" action="/home" enctype="multipart/form-data">
       {{ csrf_field() }}
-      <label for="photo"></label>
-      <input type="file" name="filename" />
-      <label>カテゴリー <input type="text" name="category_name"></label>
-      <label>ブランド <input type="text" name="brand_name"></label>
-      <label>メモ <input type="text" name="memo"></label>
-      <input type="submit" id="button" value="登録" />
+      <input type="file" name="filename" /><br>
+      <label>カテゴリー</label>
+      <input type="text" name="category_name"/><br>
+      <label>ブランド </label>
+      <input type="text" name="brand_name"><br>
+      <label>メモ </label>
+      <input type="text" name="memo"><br>
+      
+      <button type="submit">登 録</button>
     </form>
   </div>
 </body>
 </html>
+<style>
+*{
+ margin: 0;
+ padding: 0;
+ font-family: Hiragino Maru Gothic ProN;
+}
+.flex {
+display: flex;
+justify-content: space-between;
+}
+.header {
+  background-color: #333;
+  height: 70px;
+  font-size: 30px;
+  color: #EEEEEE;
+}
+.header-title p {
+  line-height: 70px;
+  font-size: 30px;
+  margin-left: 30px;
+}
+.header-right a {
+  line-height: 70px;
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
+}
+form { 
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 400px;
+  height: 400px;
+  padding: 1em;
+  border: 1px solid #CCC;
+  border-radius: 1em;
+}
+label {
+  display: inline-block;
+  width: 90px;
+  text-align: center;
+}
+input {
+margin-top: 30px;
+width: 60%;
+padding: 10px;
+color: black;
+
+/* text-align: center; */
+}
+button {
+width: 100px;
+text-align: center;
+padding: 8px 0 10px;
+/* border-radius: 25px; */
+cursor: pointer;
+margin-top: 30px;
+margin-left: 140px;
+
+}
+</style>

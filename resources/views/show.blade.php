@@ -7,14 +7,15 @@
 </head>
 <body>
 <h1>詳細</h1>
-<table>
+<table border="1">
     <tr>
-        <th>category</th>
-        <th>brand</th>
-        <th>memo</th>
-        <th>created_at</th>
+        <th>カテゴリー</th>
+        <th>ブランド</th>
+        <th>メモ</th>
+        <th>作成日</th>
     </tr>
     <tr>
+    <img src="{{ asset('storage/'.$cloth->cloth_filename) }}" width="300px">
         <td>{{ $cloth->category_name }}</td>
         <td>{{ $cloth->brand_name }}</td>
         <td>{{ $cloth->memo }}</td>

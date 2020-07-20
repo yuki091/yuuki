@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Cloth;
 use Illuminate\Http\Request;
 use Storage;
-use Intervention\Image\Facades\Image;
-
+use App\User;
+use App\Cloth;
+use Illuminate\Support\Facades\Auth;
    
 class ClothController extends Controller
-{   
+{
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index']);
+    }
  
     public function index()
     {
-        $clothes = Cloth::all();
-        return view('home',['clothes' => $clothes]);
+        $user_id = Auth::id();
+        $clothes = Cloth::where('user_id',$user_id)->get();
+        return view('home', compact('clothes','user_id'));
     }
     public function create()
     {
@@ -22,24 +27,20 @@ class ClothController extends Controller
     }
     public function store(Request $request)
     {
-
-        // Cloth::create($request->all());
-        $path = $request->file('filename')->store('public/cloth_images');
+        $filename = $request->file('filename')->getClientOriginalName();;
+        $request->file('filename')->storeAs('public', $filename);
         
         $clothes = new Cloth;
-        $clothes->category_name=$request->category_name;
-        $clothes->brand_name=$request->brand_name;
-        $clothes->memo=$request->memo;
-        $clothes->$request->$path;
+        $clothes->category_name = $request->category_name;
+        $clothes->brand_name = $request->brand_name;
+        $clothes->memo = $request->memo;
+        $clothes->cloth_filename = $filename;
+        
+        
+        $clothes->user_id = $request->user()->id;
         $clothes->save();
-        
-        // return redirect('/home');
-
-        
-
-        
+        return redirect('/home');
     }
-
     public function show($id)
     {
         $cloth = Cloth::find($id);
@@ -52,18 +53,25 @@ class ClothController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $updata=[
-            'category_name'=>$request->category_name,
-            'brand_name'=>$request->brand_name,
-            'memo'=>$request->memo
-        ];
-        Cloth::where('id',$id)->update($update);
-        return back()->with('success', '編集完了しました');
+        $cloth = Cloth::find($id);
+
+        $filename = $request->file('filename')->getClientOriginalName();;
+        $request->file('filename')->storeAs('public', $filename);
+
+        $cloth->category_name = $request->category_name;
+        $cloth->brand_name = $request->brand_name;
+        $cloth->memo = $request->memo;
+        $cloth->cloth_filename = $request->cloth_filename;
+
+        $cloth->save();
+
+        return redirect("home");
     }
     public function destroy($id)
     {
         $cloth=Cloth::find($id);
         $cloth->delete();
+        
         return redirect('home');
     }
 }

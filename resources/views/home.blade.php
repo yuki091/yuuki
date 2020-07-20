@@ -3,72 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Mycloset</title>
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>
-<div>
-  <div class="header flex">
-    <div class="header-title">
-        <p>Mycloth</p>
+  <div>
+    <div class="header flex">
+      <div class="header-title">
+        <p>Mycloset</p>
       </div>
       <div class="header-right flex">
-        <a>新規登録</a>
+        <a href="/home/create">アイテム登録</a>
       </div>
     </div>
-  </div>
-  
-</div>
-<a href="/home/create">新規登録</a>
-  <table>
-    @foreach ($clothes as $cloth)
-    <tr>
-      <!-- <td><img src="{{$cloth->cloth_filename}}" width="200" height="130"></td> -->
-      <img src="{{ asset('/storage/cloth_images/'.$cloth->cloth_filename) }}">
-      
-      <td>カテゴリー：{{ $cloth->category_name }}</td>
-      <td>ブランド：{{ $cloth['brand_name'] }}</td>
-      <td>メモ：{{ $cloth['memo'] }}</td>
-      <a href="/home/{{$cloth->category_id}}">詳細</a>
-      <td><a href="/home/{{$cloth->category_id}}/edit">編集</a></td>
-      <from action="/home/{{$cloth->category_id}}" method="post">
-        {{ csrf_field() }}
-        @method('DELETE')
-        <input type="submit" name="" value="サクじょする">
-      </form>
-    </tr> 
-    @endforeach
-  </table>
 
-</div>
+  <div class="l-wrapper">
+    <article class="card">
+      <div class="card__header">
+        @foreach ($clothes as $cloth)
+        <figure class="card__thumbnail">
+          <img src="{{ asset('storage/'.$cloth->cloth_filename) }}" width="350px" height="350px">
+        </figure>
+      </div>
+      <div class="card__body">
+        <p class="card__text">カテゴリー：{{ $cloth->category_name }}</p>
+        <p class="card__text">ブランド  ：{{ $cloth->brand_name }}</p>
+        <p class="card__text">メモ      ：{{ $cloth->memo}}</p>
+      </div>
+      <div class="card__footer">
+        <p class="card__text"><a href="/home/{{$cloth->id}}" class="button -compact">詳細</a></p>
+        <p class="card__text"><a href="/home/{{$cloth->id}}/edit" class="button -compact">編集</a></p>
+        <form action="/home/{{$cloth->id}}" method="post" class="card__text">
+          {{ csrf_field() }}
+          @method('DELETE')
+          <input type="submit" class="button -compact" value="削除">
+        </form>
+        @endforeach
+      </div>
+    </article>
+  </div>
 </body>
 </html>
-<style>
-*{
- margin: 0;
- padding: 0;
- font-family: Hiragino Maru Gothic ProN;
-}
-.flex {
-display: flex;
-justify-content: space-between;
-}
-.header {
-  background-color: #333;
-  height: 70px;
-  font-size: 30px;
-  color: #EEEEEE;
-}
-.header-title p {
-  line-height: 70px;
-  font-size: 30px;
-  margin-left: 30px;
-}
-.header-right a {
-  line-height: 70px;
-  float: right;
-  margin-right: 30px;
-  cursor: pointer;
-  font-size: 18px;
-}
-</style>
+
+
+
 
