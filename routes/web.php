@@ -9,7 +9,6 @@ Route::resource('/home', 'ClothController');
 
 Route::group(['prefix' => 'user'], function() {
   
-
   Route::get('/signup',[
     'uses' => 'UserController@getSignup',
     'as' => 'user.signup'

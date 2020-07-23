@@ -39,13 +39,14 @@ class UserController extends Controller
    $this->validate($request,[
    'email' => 'email|required',
    'password' => 'required|min:4'
-   ]);
+    ]);
     if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
     // return redirect()->route('user.profile');
     return redirect("home");
     }
     return redirect()->back();
     }
+    
    
 
 }

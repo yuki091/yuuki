@@ -21,17 +21,21 @@ font-size: 30px;
 margin-left: 30px;
 }
 .header-right a {
-line-height: 70px;
-float: right;
-margin-right: 30px;
-cursor: pointer;
-font-size: 18px;
-color: white;
+  line-height: 70px;
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+  font-size: 18px;
+  color: white;
 }
 .l-wrapper {
   margin: 3rem;
   width: 350px;
+  /* display: flex;
+  flex-wrap: wrap; */
+  float: left;
 }
+
 .card {
   background-color: #fff;
   box-shadow: 0 0 8px rgba(0, 0, 0, .16);
@@ -55,18 +59,21 @@ color: white;
 .card__text {
   font-size: 1rem;
 }
-.card__text + .card__text {
+.card__text{
   margin-top: .5rem;
 }
 .card__footer {
   padding: 1rem;
   border-top: 1px solid #ddd;
+  clear: both;
+  display: inline-flex;
 }
 .button {
   display: inline-block;
   text-decoration: none;
   transition: background-color .3s ease-in-out;
   cursor: pointer;
+  margin-left: 20px;
 }
 .button.-compact {
   padding: .5rem 1rem;
@@ -83,4 +90,11 @@ color: white;
 form input{
   border-top: 1px solid #ddd;
   padding: 1rem;
+  margin-top: .5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  transition: background-color .3s ease-in-out;
+  cursor: pointer;
 }

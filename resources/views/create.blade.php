@@ -78,14 +78,11 @@ margin-top: 30px;
 width: 60%;
 padding: 10px;
 color: black;
-
-/* text-align: center; */
 }
 button {
 width: 100px;
 text-align: center;
 padding: 8px 0 10px;
-/* border-radius: 25px; */
 cursor: pointer;
 margin-top: 30px;
 margin-left: 140px;

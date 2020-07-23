@@ -19,6 +19,7 @@ class ClothController extends Controller
     {
         $user_id = Auth::id();
         $clothes = Cloth::where('user_id',$user_id)->get();
+
         return view('home', compact('clothes','user_id'));
     }
     public function create()
@@ -35,10 +36,9 @@ class ClothController extends Controller
         $clothes->brand_name = $request->brand_name;
         $clothes->memo = $request->memo;
         $clothes->cloth_filename = $filename;
-        
-        
         $clothes->user_id = $request->user()->id;
         $clothes->save();
+
         return redirect('/home');
     }
     public function show($id)
@@ -54,15 +54,12 @@ class ClothController extends Controller
     public function update(Request $request, $id)
     {
         $cloth = Cloth::find($id);
-
         $filename = $request->file('filename')->getClientOriginalName();;
         $request->file('filename')->storeAs('public', $filename);
-
         $cloth->category_name = $request->category_name;
         $cloth->brand_name = $request->brand_name;
         $cloth->memo = $request->memo;
-        $cloth->cloth_filename = $request->cloth_filename;
-
+        $cloth->cloth_filename = $filename;
         $cloth->save();
 
         return redirect("home");
@@ -75,3 +72,4 @@ class ClothController extends Controller
         return redirect('home');
     }
 }
+   
